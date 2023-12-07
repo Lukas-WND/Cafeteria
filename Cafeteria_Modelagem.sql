@@ -1,5 +1,4 @@
 CREATE DATABASE Cafeteria;
-
 USE Cafeteria;
 
 CREATE TABLE Funcionarios (
@@ -100,7 +99,7 @@ BEGIN
         );
 
         -- Calcular a taxa de serviço (10% do total)
-        SET @taxa_servico := @total_pedido * 0.10;
+        SET @taxa_servico := @subtotal_pedido * 0.10;
         
         SET @total_pedido := @taxa_servico + @subtotal_pedido;
 
@@ -126,11 +125,21 @@ END;
 
 DELIMITER ;
 
-UPDATE Pedidos SET statusPedido = 'fechado' WHERE idPedido = 93;
-
+SELECT * FROM Clientes;
+SELECT * FROM Funcionarios;
+SELECT * FROM Produtos;
+SELECT * FROM Mesas;
+SELECT * FROM Pedidos;
+SELECT * FROM Detalhes_Pedido;
 SELECT * FROM Pedidos_Fechados;
 
-UPDATE Pedidos_Fechados SET statusPagamento = 'finalizado' WHERE idPedido = 93;
+UPDATE Pedidos SET statusPedido = 'fechado' WHERE idPedido = 1;
+UPDATE Pedidos SET statusPedido = 'fechado' WHERE idPedido = 10;
+
+UPDATE Pedidos_Fechados SET statusPagamento = 'finalizado' WHERE idPedido = 10;
+
+DELETE FROM Detalhes_Pedido WHERE idPedido = 2;
+DELETE FROM Pedidos WHERE idPedido = 2;
 
 SELECT * FROM Pedidos_Fechados;
 
